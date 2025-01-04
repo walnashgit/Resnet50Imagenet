@@ -20,7 +20,6 @@ class ImageNetDataset:
         self.dataset = []
         self.train = train
 
-        annot_file = True
         if CONFIG.get("data_annotation_file", {}):
             if train and CONFIG["data_annotation_file"]["train"]:
                 df = pd.read_csv(CONFIG["data_annotation_file"]["train"])
@@ -33,13 +32,13 @@ class ImageNetDataset:
         return len(self.dataset)
 
     def __getitem__(self, idx):
-        image_dir = CONFIG["root_dir"] + "/ILSVRC/Data/CLS-LOC/%s/" % ("train" if self.train else "val")
-        image, label = self.dataset[idx]
-        image = Image.open(image_dir + image).convert("RGB")
-        # image = np.array(image)  # Convert PIL Image to NumPy array
+        # image_dir = CONFIG["root_dir"] + "/ILSVRC/Data/CLS-LOC/%s/" % ("train" if self.train else "val")
+        # image, label = self.dataset[idx]
+        # image = Image.open(image_dir + image).convert("RGB")
+        image_path, label = self.dataset[idx]
+        image = Image.open(image_path).convert("RGB")
         if self.transform:
-            image = self.transform(image)  # Albumentations transform
-        # label = torch.tensor(label, dtype=torch.long)  # Convert label to tensor
+            image = self.transform(image)
         return image, label
 
 
