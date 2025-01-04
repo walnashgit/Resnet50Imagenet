@@ -26,6 +26,7 @@ This project implements a ResNet50 model for image classification on the ImageNe
 - **Learning Rate**: 
   - Used LR Finder for 500 steps to find optimal learning rate
   - Implemented One Cycle Policy for learning rate scheduling
+  - Total training steps: 33,399
 - **Training Speed**:
   - FP16 precision for faster training
   - Distributed Data Parallel (DDP) training across 4 GPUs
@@ -58,7 +59,36 @@ This project implements a ResNet50 model for image classification on the ImageNe
 
 ## Demo
 
-[Hugging Face Space](https://huggingface.co/spaces/walnash/Resnet50_ImageNet)
+[Hugging Face APP](https://huggingface.co/spaces/walnash/Resnet50_ImageNet)
 
 ## Project Structure 
 
+The key files in this project are:
+- `requirements.txt`: Contains the dependencies for the project
+- `ResnetNetwork.py`: Implements the ResNet50 model using PyTorch Lightning with custom training logic and LR finder
+- `dataset.py`: Contains the ImageNet dataset class and Lightning DataModule with data transformations
+- `create_annotations.py`: Utility script to create CSV annotation files for efficient data loading
+- `config.py`: Contains all configuration parameters for model training and dataset paths
+- `main.py`: Entry point for training, sets up training configuration and launches the training process
+
+
+## Usage
+
+1. Clone the repository
+```
+git clone https://github.com/walnashgit/Resnet50Imagenet.git
+```
+2. Install the dependencies using 
+```
+pip install -r requirements.txt
+```
+3. Download the [ImageNet dataset](https://www.kaggle.com/competitions/imagenet-object-localization-challenge) and place it in the `data` directory
+
+4. Run the create_annotations script
+```
+python create_annotations.py
+```
+5. Run the training script
+```
+python main.py
+```
