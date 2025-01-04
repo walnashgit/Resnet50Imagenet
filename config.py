@@ -23,5 +23,11 @@ CONFIG = {
 
     "check_val_every_n_epoch": 5,
 
-    "lr_finder": False
+    "lr_finder": False,
+    
+    # Data paths
+    "train_dir": "/data/ILSVRC/Data/CLS-LOC/train",
+    "class_index_file": "/data/working/class_map.csv",
+    "val_dir": "/data/ILSVRC/Data/CLS-LOC/val",
+    "val_mapping_file": "/data/LOC_val_solution.csv"
 }
