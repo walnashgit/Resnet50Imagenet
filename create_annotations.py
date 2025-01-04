@@ -76,3 +76,7 @@ def create_val_annotation():
 
     print(f"Validation metadata CSV file saved to {val_annotation_file}")
 
+if __name__ == "__main__":
+    create_train_annotation()
+    create_val_annotation()
+
