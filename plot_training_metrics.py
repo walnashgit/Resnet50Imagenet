@@ -39,13 +39,14 @@ try:
 
     # 3. Learning Rate Schedule
     ax3 = plt.subplot(2, 2, 3)
-    lr_data = df['lr-SGD'].dropna()
-    steps = range(len(lr_data))
-    ax3.plot(steps, lr_data, label='Learning Rate', color='green')
+    lr_data = df[['step', 'lr-SGD']].dropna()
+    ax3.plot(lr_data['step'], lr_data['lr-SGD'], label='Learning Rate', color='green')
     ax3.set_xlabel('Step')
     ax3.set_ylabel('Learning Rate')
     ax3.set_title('Learning Rate Schedule (One Cycle Policy)')
     ax3.grid(True)
+    # Set x-axis to show all steps using the actual data
+    ax3.set_xlim(0, lr_data['step'].max())  # Dynamically get the max step
 
     # 4. Training Time per Epoch
     ax4 = plt.subplot(2, 2, 4)
@@ -68,14 +69,15 @@ try:
 
     # Create a separate plot for step-wise training metrics
     plt.figure(figsize=(15, 6))
-    step_acc = df['train_acc_step'].dropna()
-    steps = range(len(step_acc))
-    plt.plot(steps, step_acc, label='Training Accuracy', alpha=0.6)
+    step_acc = df[['step', 'train_acc_step']].dropna()
+    plt.plot(step_acc['step'], step_acc['train_acc_step'], label='Training Accuracy', alpha=0.6)
     plt.title('Training Accuracy per Step')
     plt.xlabel('Step')
     plt.ylabel('Accuracy (%)')
     plt.grid(True)
     plt.legend()
+    # Set x-axis to show all steps
+    plt.xlim(0, step_acc['step'].max())  # Dynamically get the max step
     plt.savefig('training_steps.png', dpi=300, bbox_inches='tight')
     plt.close()
 
